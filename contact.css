@@ -1,0 +1,737 @@
+/* Basic reset */
+@font-face {
+  font-family: "Chale";
+  src: url(/assets/fonts/ChaleBrush.otf) format("opentype");
+}
+@font-face {
+  font-family: "Madrid";
+  src: url(/assets/fonts/MadridAMARegular.otf) format("opentype");
+}
+@font-face {
+  font-family: "Optik";
+  src: url(/assets/fonts/TjfOptikSansBlack.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Chint";
+  src: url(/assets/fonts/ZTChintzy-Light.ttf) format("truetype");
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Chale";
+  line-height: 1.6;
+  color: #333;
+  background-color: #f0f0f0;
+  overflow-x: hidden;
+}
+
+@media (max-width: 480px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #b8040d;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scroll-to-top.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background-color: #0267c1;
+}
+
+/* Lazy Load Images */
+img[data-src] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[data-src].loaded {
+  opacity: 1;
+}
+
+/* Animate Elements on Scroll */
+.scroll-element {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-element.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  color: #e01b1b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  border-bottom: 3px solid rgba(224, 27, 27, 0.8);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(240, 240, 240, 0.966),
+    rgba(224, 224, 224, 0.863)
+  );
+  z-index: -1; /* Ensures the overlay is behind the content */
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/images/barda.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -2; /* Ensures the background image is behind the gradient */
+}
+
+.logo a {
+  display: inline-block;
+}
+
+.logo img {
+  max-width: 88px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.nav-links {
+  font-size: 37px;
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links li {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links li a {
+  font-size: 37px;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #e01b1b, #dddddd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links li a:hover {
+  color: #e01b1b;
+  background: linear-gradient(135deg, #37426f, #e01b1b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1.1) translateY(-5px); /* Scale and translate for a pop effect */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Increased shadow for a more pronounced effect */
+}
+
+.nav-links li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: #e01b1b;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-links li:hover::after {
+  width: 100%;
+  background-color: #37426f;
+}
+
+/* Removed the light red background box */
+.nav-links li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links li:hover a::before {
+  opacity: 0;
+}
+
+.nav-links li a span {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.nav-links li:hover a span {
+  transform: translateY(-5px); /* Additional text movement for hover effect */
+}
+
+.social-icons {
+  margin-top: 1rem; /* Space between the content and icons */
+}
+
+.social-icon {
+  font-size: 2rem;
+  color: #e01b1b;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #37426f;
+}
+
+/* Hamburger Button Styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 30px;
+  height: 3px;
+  background-color: #e01b1b;
+  margin: 5px 0;
+  margin-left: 2rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hamburger.active div {
+  background-color: #e01b1b;
+}
+/* Mobile Menu Hidden by Default */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, rgb(240, 240, 240), rgb(224, 224, 224));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  z-index: 20;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* When active, slide in from the left */
+.mobile-menu.active {
+  display: flex;
+  transform: translateX(0);
+}
+
+/* Mobile Menu Links */
+.mobile-menu a {
+  color: #37426f;
+  text-decoration: none;
+  font-size: 2rem;
+  padding: 15px 0;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Separator lines */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover Effect for Links */
+.mobile-menu a:hover {
+  color: #e01b1b;
+  background-color: rgba(255, 255, 255, 0.1); /* Slight background change */
+}
+
+/* Add a close button */
+.mobile-menu .close-btn {
+  align-self: flex-end;
+  font-size: 2rem;
+  color: #37426f;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu .close-btn:hover {
+  color: #e01b1b;
+}
+
+/* Add a logo or header to the mobile menu */
+.mobile-menu .menu-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.mobile-menu .menu-header img {
+  max-width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
+  margin-top: -4rem;
+}
+
+.mobile-menu .menu-header img:hover {
+  transform: scale(1.1);
+}
+
+.animated-text {
+  margin-top: 7rem;
+  padding: 10px 0;
+  background-color: #f5e1bc;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100000;
+}
+
+.marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 45s linear infinite;
+}
+
+.marquee span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #000;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+}
+/* Contact Section */
+.contact-section {
+  margin-top: 4rem;
+  padding: 4rem 0;
+  background: linear-gradient(
+      135deg,
+      rgba(230, 230, 230, 0),
+      rgba(245, 245, 245, 0)
+    ),
+    url("/assets/images/TruckSide.jpg");
+  background-size: cover;
+  background-attachment: fixed; /* Parallax effect */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional: Add an overlay for better text readability */
+.contact-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(230, 230, 230, 0.7); /* Semi-transparent overlay */
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2; /* Ensure the container is above the overlay */
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-section h1 {
+  font-size: 36px;
+  color: #b8040d;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-section h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: #b8040d;
+  border-radius: 2px;
+}
+
+.contact-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.contact-box h2 {
+  font-size: 30px;
+  color: #37426f;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.contact-box h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #37426f;
+  border-radius: 2px;
+}
+
+.contact-box p {
+  font-family: "Madrid";
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.contact-box a {
+  color: #b8040d;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+  position: relative;
+}
+
+.contact-box a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #b8040d;
+  transition: width 0.3s ease;
+}
+
+.contact-box a:hover {
+  color: #37426f;
+  text-decoration: none;
+}
+
+.contact-box a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 360px) {
+  /* Contact Section */
+  .contact-box p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .contact-box .social-media-links {
+    display: flex;
+    gap: 15px;
+  }
+
+  .contact-box .social-media-links .social-icon {
+    font-size: 20px;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s ease;
+    background: linear-gradient(135deg, #fff, #f9f9f9);
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-box .social-media-links .social-icon:hover {
+    color: #b8040d;
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .contact-box .social-media-links a {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+
+  .contact-box .social-media-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s ease;
+  }
+
+  .contact-box .social-media-links a:hover {
+    color: #b8040d;
+    transform: scale(1.05);
+    text-decoration: none;
+  }
+
+  .contact-box .social-media-links a:hover::after {
+    width: 100%;
+    background-color: #b8040d;
+  }
+}
+@media (max-width: 390px) {
+  .contact-box .social-media-links {
+    display: flex;
+    gap: 15px;
+  }
+  .social-media-links-footer {
+    font-size: 14px;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s ease;
+    background: linear-gradient(135deg, #fff, #f9f9f9);
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-box .social-media-links .social-icon {
+    font-size: 20px;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s ease;
+    background: linear-gradient(135deg, #fff, #f9f9f9);
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-box .social-media-links .social-icon:hover {
+    color: #b8040d;
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .contact-box .social-media-links a {
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+
+  .contact-box .social-media-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s ease;
+  }
+
+  .contact-box .social-media-links a:hover {
+    color: #b8040d;
+    transform: scale(1.05);
+    text-decoration: none;
+  }
+
+  .contact-box .social-media-links a:hover::after {
+    width: 100%;
+    background-color: #b8040d;
+  }
+}
+/* Footer Styles */
+.footer {
+  text-align: center;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  padding: 2rem 1rem;
+  border-top: 1px solid #d0d0d0;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-info,
+.footer-socials,
+.footer-nav {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-info h3,
+.footer-socials h3,
+.footer-nav h3 {
+  font-size: 1.25rem;
+  color: #b8040d;
+  margin-bottom: 0.5rem;
+}
+
+.footer-info p,
+.footer-socials ul,
+.footer-nav ul {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-info p {
+  margin-bottom: 1rem; /* Spacing between address and phone */
+}
+
+.footer-socials ul,
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-socials ul {
+  display: inline-block;
+  padding: 0;
+}
+
+.footer-socials li,
+.footer-nav li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-socials a,
+.footer-nav a,
+.footer-info a {
+  text-decoration: none;
+  color: #0267c1;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer-socials a:hover,
+.footer-nav a:hover,
+.footer-info a:hover {
+  color: #b8040d;
+}
+
+/* Specific Styles for Address and Phone Links */
+.footer-phone a,
+.footer-address a {
+  font-family: "Chale";
+  display: inline-block;
+  font-size: 1.1rem;
+  color: #0267c1;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer-phone a:hover,
+.footer-address a:hover {
+  color: #b8040d;
+  background-color: #f0f0f0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 390px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-info,
+  .footer-socials,
+  .footer-nav {
+    text-align: center;
+  }
+}
